@@ -133,7 +133,7 @@ function validateInput(opts) {
   let repo = opts.repo;
   if (!repo) {
     const pkgBuf = fs.readFileSync(
-      path.join(electron.app.getAppPath(), "package.json")
+      path.join(electron.app.getAppPath(), "../package.json")
     );
     const userPkg = JSON.parse(pkgBuf.toString());
     const repoString =
