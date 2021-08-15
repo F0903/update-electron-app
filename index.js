@@ -7,7 +7,7 @@ const path = require("path");
 const fs = require("fs");
 const os = require("os");
 const { format } = require("util");
-const pkg = require("../package.json");
+const pkg = require("./package.json");
 const userAgent = format(
   "%s/%s (%s: %s)",
   pkg.name,
@@ -135,8 +135,9 @@ function validateInput(opts) {
     const pkgBuf = fs.readFileSync(
       path.join(electron.app.getAppPath(), "package.json")
     );
-    const pkg = JSON.parse(pkgBuf.toString());
-    const repoString = (pkg.repository && pkg.repository.url) || pkg.repository;
+    const userPkg = JSON.parse(pkgBuf.toString());
+    const repoString =
+      (userPkg.repository && userPkg.repository.url) || userPkg.repository;
     const repoObject = gh(repoString);
     assert(
       repoObject,
